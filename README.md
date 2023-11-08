@@ -409,7 +409,6 @@ From the summary statistics, the mean > the median (50% percentile) in all datas
 
 ### Outliers
 ![Outliers Plot](outliers.png)
-*Outliers in the continuous columns.*
 
 I removed the outliers fromt `Price` and `Size` columns only, using the z-score method
 ```python
@@ -426,7 +425,6 @@ with thershold = 0.74 for `Price` and 0.21 for `Size`.
 
 ### Correlation Heatmap
 ![Correlation Heatmap Plot](heatmap.png)
-*Correclations between dataset columns.*
 
 ### Some Observation and key findings
 - Houses with more bathrooms tend to have higher rental prices.
