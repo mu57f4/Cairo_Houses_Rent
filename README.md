@@ -186,10 +186,6 @@ The dataset contains total 25 columns and 11362 rows (records),
     .dataframe thead th {
         text-align: right;
     }
-    
-    .dataframe table-wrapper {
-        overflow-x: scroll;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
