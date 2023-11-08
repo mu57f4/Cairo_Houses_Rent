@@ -1,6 +1,6 @@
 # Cairo Houses Rent Prices
-![Albuquerque, New Mexico](descriptions_word_cloud.png)
-*Wordcloud from the description of some posted ads.*
+![Wordcloud](descriptions_word_cloud.png)
+*Wordcloud from the description of some posted ads (check EDA notebook).*
 
 ![Python version](https://img.shields.io/badge/Python%20version-3.11%2B-lightgrey)
 ![GitHub last commit](https://img.shields.io/github/last-commit/mu57f4/Cairo_Houses_Rent)
@@ -404,20 +404,44 @@ The dataset contains total 25 columns and 11362 rows (records),
     </tr>
   </tbody>
 </table>
-</div>
 
+From the summary statistics, the mean > the median (50% percentile) in all datasets columns, that suggests there're extreme values outliers in the datasets.
 
+### Outliers
+![Outliers Plot](outliers.png)
+*Outliers in the continuous columns.*
+
+I removed the outliers fromt `Price` and `Size` columns only, using the z-score method
+```python
+def remove_outliers(column_name, z_threshold=2):
+    """
+    Remove outliers from column using the z-score method.
+    """
+    z_scores = zscore(data[column_name])
+    outliers_mask = abs(z_scores) > z_threshold
+    data_no_outliers = data[~outliers_mask]
+    return data_no_outliers
+```
+with thershold = 0.74 for `Price` and 0.21 for `Size`.
+
+### Correlation Heatmap
+![Correlation Heatmap Plot](heatmap.png)
+*Correclations between dataset columns.*
+
+### Some Observation and key findings
+- Houses with more bathrooms tend to have higher rental prices.
+- Smaller houses are more likely to be furnished.
+- The presence or absence of an elevator does not show a strong correlation with the rental price.
+- The number of bedrooms and bathrooms has a high positive correlation with the size of the house. This suggests that larger houses tend to have more bedrooms and bathrooms. 
+- Houses with central AC show a positive correlation with being furnished and having built-in kitchen appliances.
+- The presence of electricity and water meters is positively correlated with having natural gas and a landline.
+- Houses with a maid's room show a positive correlation with having covered parking, a pool, and allowing pets.
+- There is a small positive correlation between the level of the house and the presence of an elevator.
+- The level of the house does not show a significant correlation with the size of the house.
+
+You can find more details about the dataset in this [notebook](/notebooks/EDA.ipynb).
 
 ## Model Selection
-I split the data based on `For_rent` feature into `Sale` and `Rent`, then train four different algorithms on each dataset and compair the outcomes using `MAE` and `RMSE`.
-
-These are the four Algorihtms:
-- Linear Regression:
-- Random Forest:
-- XGBoost:
-- Neural Network: 
-
-and using stacking technique by building a neural network as meta-learner to take the predictions of the four models as input and bring back the final target output.
 
 ## Models Training
 
