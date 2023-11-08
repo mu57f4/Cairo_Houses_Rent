@@ -30,7 +30,7 @@ Complete Analysis for Rent housing prices in Egypt (Cairo & Giza).
 
 ## Data Collection
 Data sources:
-- From [dubizzle.com.eg](https://dubizzle.com.eg) using [this script](#https://colab.research.google.com/drive/1oVTiayrMQpsYrf07b4SRTgjWwv2anMX3?usp=sharing)
+- From [dubizzle.com.eg](https://dubizzle.com.eg), check the scripts used in [notebooks](/notebooks/)
 
 Some information about the dataset:
 ```
@@ -132,7 +132,7 @@ data_copy = impute_it.fit_transform(data_copy)
 ```
 
 ## Location Geocoding:
-Added the geographic coordinate by combining `City` and `Region` columns to one Location column and pass it to this function to create a lookup table to save time.
+Added the geographic coordinate by combining City and Region columns to one Location column and pass it to this function to create a lookup table to save time.
 ```python
 geolocator = Nominatim(user_agent="Python3.11.3")
 
@@ -167,7 +167,7 @@ Example of the lookup table:
  'Marg': [30.143278, 31.35617],
  'New Nozha': [30.12475835, 31.370071774421465],
 ```
-After using this table to encode the dataFrame, I droped the `nan` values.
+Droped the `np.nan` values after using this table to encode the dataFrame.
 
 ## EDA
 The dataset contains total 25 columns and 11362 rows (records),
@@ -410,7 +410,7 @@ From the summary statistics, the mean > the median (50% percentile) in all datas
 ### Outliers
 ![Outliers Plot](outliers.png)
 
-I removed the outliers fromt `Price` and `Size` columns only, using the z-score method
+I removed the outliers fromt Price and Size columns only, using the z-score method
 ```python
 def remove_outliers(column_name, z_threshold=2):
     """
@@ -421,7 +421,7 @@ def remove_outliers(column_name, z_threshold=2):
     data_no_outliers = data[~outliers_mask]
     return data_no_outliers
 ```
-with thershold = 0.74 for `Price` and 0.21 for `Size`.
+According to summary stats table and market status. I choosed thershold with value = 0.74 for Price column and 0.21 for Size column.
 
 ### Correlation Heatmap
 ![Correlation Heatmap Plot](heatmap.png)
