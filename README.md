@@ -16,10 +16,11 @@ Complete Analysis for Rent housing prices in Egypt (Cairo & Giza).
 
 ## Table of Content
   - [Problem Statement](#Problem-statement)
-  - [Data Collection](#Data-Collection)
-  - [Cleaning Process](#Cleaning-Process)
-  - [Location Geo Coding](#Location-Geo-Coding)
+  - [Dataset](#data-collection)
+  - [Cleaning Process](#cleaning-process)
+  - [Location Geo Coding](#location-geocoding)
   - [EDA](#EDA)
+  - [Machine Learning Preprocessing](#ml-preprocessing)
   - [Model Selection](#Model-Selection)
   - [Model Training](#Model-Training)
   - [Evaluation](#Evaluation)
@@ -28,7 +29,7 @@ Complete Analysis for Rent housing prices in Egypt (Cairo & Giza).
   - [Limitations and Possible Improvmentsx](#Limitations-and-Possible-Improvments)
   
 
-## Data Collection
+## Dataset
 Data sources:
 - From [dubizzle.com.eg](https://dubizzle.com.eg), check the scripts used in [notebooks](/notebooks/)
 
@@ -105,7 +106,7 @@ memory usage: 2.7+ MB
 29. `Compound`
 
 ## Cleaning Process
-![NaN values](nanValues.png)
+<img src="nanValues.png" width="800" height="600">
 
 Here is the cleaning process:
 1. Clean continuous columns.
@@ -408,7 +409,10 @@ The dataset contains total 25 columns and 11362 rows (records),
 From the summary statistics, the mean > the median (50% percentile) in all datasets columns, that suggests there're extreme values outliers in the datasets.
 
 ### Outliers
-![Outliers Plot](outliers.png)
+<img src="outliers.png" width="800" height="400">
+
+### Using z-score
+<!-- <img src="z-score.png" width="400" height="200"> -->
 
 I removed the outliers fromt Price and Size columns only, using the z-score method
 ```python
@@ -421,10 +425,11 @@ def remove_outliers(column_name, z_threshold=2):
     data_no_outliers = data[~outliers_mask]
     return data_no_outliers
 ```
+
 According to summary stats table and market status. I choosed thershold with value = 0.74 for Price column and 0.21 for Size column.
 
 ### Correlation Heatmap
-![Correlation Heatmap Plot](heatmap.png)
+<img src="heatmap.png" width="800" height="600">
 
 ### Some Observation and key findings
 - Houses with more bathrooms tend to have higher rental prices.
@@ -439,11 +444,35 @@ According to summary stats table and market status. I choosed thershold with val
 
 You can find more details about the dataset in this [notebook](/notebooks/EDA.ipynb).
 
+## ML Preprocessing
+I converted the categorical column HouseType into dummy columns using one-hot encoding, then droped the Area and City columns.
+
+### Feature Engineering
+- `TotalRooms`: Sum of `Bedrooms` and `Bathrooms`.
+- `BedtoBath_Ratio`: Ratio of `Bathrooms` to `Bedrooms`.
+- `Amenities_Score`: Sum of amenities divided by the total number of amenities.
+- `Level_category`: Categorizes levels into low, medium, and high categories.
+- `accessibility_score`: Assigns a score based on `Level_category` and `Elevator` features.
+
+### Mutual Information Score
+Defined a function make_mi_score to calculate mutual information scores for each feature with respect to the target variable 'Price' using mutual_info_regression from sklearn.
+```python
+def make_mi_score(df):
+    X = df.drop(columns='Price')
+    y = df['Price']
+    mi_scores = mutual_info_regression(X, y)
+    mi_scores = pd.Series(mi_scores, name="MI Scores", index=X.columns)
+    return mi_scores.sort_values(ascending=False)
+```
+and visualizes the mutual information scores for the selected features.
+<img src="mi_scores.png" width="800" height="400">
+
+### Feature Scaling
+Split the dataset into discrete and binary columns, then built a scaler pipeline using StandardScaler for discrete columns and MinMaxScaler for binary columns.
+
 ## Model Selection
 
-## Models Training
-
-## Evaluation
+## Training & Evaluation
 
 ## Feature Importance and Insights
 
