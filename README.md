@@ -1,5 +1,5 @@
 # Cairo Houses Rent Prices
-![Wordcloud](descriptions_word_cloud.png)
+![Wordcloud](/imgs/descriptions_word_cloud.png)
 *Wordcloud from the description of some posted ads (check EDA notebook).*
 
 ![Python version](https://img.shields.io/badge/Python%20version-3.11%2B-lightgrey)
@@ -106,7 +106,7 @@ memory usage: 2.7+ MB
 29. `Compound`
 
 ## Cleaning Process
-<img src="nanValues.png" width="800" height="600">
+<img src="imgs/nanValues.png" width="800" height="600">
 
 Here is the cleaning process:
 1. Clean continuous columns.
@@ -409,11 +409,9 @@ The dataset contains total 25 columns and 11362 rows (records),
 From the summary statistics, the mean > the median (50% percentile) in all datasets columns, that suggests there're extreme values outliers in the datasets.
 
 ### Outliers
-<img src="outliers.png" width="800" height="400">
+<img src="imgs/outliers.png" width="800" height="400">
 
 ### Using z-score
-<!-- <img src="z-score.png" width="400" height="200"> -->
-
 I removed the outliers fromt Price and Size columns only, using the z-score method
 ```python
 def remove_outliers(column_name, z_threshold=2):
@@ -429,7 +427,7 @@ def remove_outliers(column_name, z_threshold=2):
 According to summary stats table and market status. I choosed thershold with value = 0.74 for Price column and 0.21 for Size column.
 
 ### Correlation Heatmap
-<img src="heatmap.png" width="800" height="600">
+<img src="imgs/heatmap.png" width="800" height="600">
 
 ### Some Observation and key findings
 - Houses with more bathrooms tend to have higher rental prices.
@@ -465,7 +463,7 @@ def make_mi_score(df):
     return mi_scores.sort_values(ascending=False)
 ```
 and visualizes the mutual information scores for the selected features.
-<img src="mi_scores.png" width="800" height="400">
+<img src="imgs/mi_scores.png" width="800" height="400">
 
 ### Feature Scaling
 Split the dataset into discrete and binary columns, then built a scaler pipeline using StandardScaler for discrete columns and MinMaxScaler for binary columns.
