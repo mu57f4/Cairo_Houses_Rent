@@ -481,12 +481,15 @@ StdScaler_pipeline = Pipeline([('StandardScaler', standardTransformer)])
 ```
 
 ## Model Selection
-I trained four diffrenet ML algorithms on the dataset:
+I trained 4 diffrenet ML algorithms with fixed parameters (not tuned), the models are:
 - Linear Regression
 - Random Forest
 - XGBoost
 - Support Vector Regressor (SVR)
-then, I compared their performance using score, mean absolute error (MAE) and root mean square error (RMSE) and here's the results:
+
+Split the data into train and test sets and used cross-validation to detect overfitting/underfitting or failing to generalize patterns in the data.
+
+Then, I compared their performance using score, mean absolute error (MAE) and root mean square error (RMSE) and here's the results:
 ```
        Linear Regression  Random Forest       XGBoost           SVR
 score           0.381497       0.627347      0.404103     -0.027866
@@ -496,7 +499,8 @@ mse         11071.525313    8593.873711  10867.309260  14272.652772
 
 <img src="imgs/metrics.png" width="1600" height="400">
 
-- Obviously the best model score is Random Forest with score almost 63%.
+### Conclusion
+- Obviously, the best model score is Random Forest with almost 0.63 score.
 - The lowest MAE and RMSE is Random Forest.
 - Therefor,  selected model is Random Forest model.
 
