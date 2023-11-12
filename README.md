@@ -492,7 +492,6 @@ then, I compared their performance using score, mean absolute error (MAE) and ro
 score           0.381497       0.627347      0.404103     -0.027866
 mae          7883.377945    5515.289442   7235.837002  10116.918912
 mse         11071.525313    8593.873711  10867.309260  14272.652772
-
 ```
 
 <img src="imgs/metrics.png" width="1600" height="400">
