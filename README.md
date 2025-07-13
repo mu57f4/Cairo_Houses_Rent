@@ -523,7 +523,7 @@ The hyperparameters tuning preformed with `GridSearchCV` to find the best combin
 |----------------------------------|--------------|-----------|------------------|-------------------|-----------|--------------|-----------|----------|
 | Base Model                       | 100          | 15        | 5                | 15                | True      | sqrt         | 5599.13   | 5993.85  |
 | Grid Search                      | 200          | 20        | 5                | 5                 | True      | sqrt         | 5167.73   | 5825.16  |
-| Grid Search (Full Dataset Only) | 200          | 20        | 5                | 5                 | True      | sqrt         | 5139.55   | —        |
+| Grid Search (Full Dataset) | 200          | 20        | 5                | 5                 | True      | sqrt         | 5139.55   | —        |
 
 
 ## Feature Importance and Insights
