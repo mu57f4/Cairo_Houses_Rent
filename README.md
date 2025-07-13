@@ -519,6 +519,13 @@ After some experiments playing with hyperparameters, I detected that the model s
 
 The hyperparameters tuning preformed with `GridSearchCV` to find the best combination of parameters for the random forest model, with also cross-validation of 3 folds, and then, trained the best model on the full dataset (Train+Test).
 
+| Model Description                 | n_estimators | max_depth | min_samples_leaf | min_samples_split | bootstrap | max_features | Train MAE | Test MAE |
+|----------------------------------|--------------|-----------|------------------|-------------------|-----------|--------------|-----------|----------|
+| Base Model                       | 100          | 15        | 5                | 15                | True      | sqrt         | 5599.13   | 5993.85  |
+| Grid Search                      | 200          | 20        | 5                | 5                 | True      | sqrt         | 5167.73   | 5825.16  |
+| Grid Search (Full Dataset Only) | 200          | 20        | 5                | 5                 | True      | sqrt         | 5139.55   | —        |
+
+
 ## Feature Importance and Insights
 
 <img src="imgs/feat_importance.png" width="600" height="400">
