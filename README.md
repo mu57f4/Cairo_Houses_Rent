@@ -37,6 +37,8 @@ cd Cairo_Houses_Rent
 pip install -r requirements.txt
 ```
 
+You can find the deployed web app [here](https://cairo-houses-rent.streamlit.app/)
+
 ## Dataset
 Data sources:
 From [dubizzle.com.eg](https://dubizzle.com.eg), check the scripts used in [notebooks](/notebooks/)
@@ -537,6 +539,8 @@ You can notice that the level is not that important compared to the above listed
 ## Deployment
 
 Created a one page `Streamlit` web application that takes the input from the user, do the preprocessing, then, pass it the model to predict the rent price.
+
+You can find this deployed web app [here](https://cairo-houses-rent.streamlit.app/)
 
 <img src="imgs/web_app.png" width="700" height="400">
 
