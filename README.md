@@ -29,6 +29,14 @@
 ## Introduction
 This project provides a comprehensive analysis and predictive modeling of rental housing prices in Cairo and Giza, Egypt. The project explores the key factors influencing rent prices using real-world data from online listings, and leverages machine learning techniques to build a price prediction model. The goal is to offer valuable insights for both renters and property owners, enabling more informed decisions the housing market.
 
+To reproduce the results in this work, run the following commands in your terminal
+
+```Bash
+git clone https://github.com/mu57f4/Cairo_Houses_Rent.git
+cd Cairo_Houses_Rent
+pip install -r requirements.txt
+```
+
 ## Dataset
 Data sources:
 From [dubizzle.com.eg](https://dubizzle.com.eg), check the scripts used in [notebooks](/notebooks/)
