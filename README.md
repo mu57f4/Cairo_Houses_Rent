@@ -6,32 +6,32 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/mu57f4/Cairo_Houses_Rent)
 ![GitHub repo size](https://img.shields.io/github/repo-size/mu57f4/Cairo_Houses_Rent)
 [![Open in kaggle](https://img.shields.io/badge/Kaggle-%20Dataset-lightgrey)](https://www.kaggle.com/datasets/mu6tf2/egypt-housing-rent)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1oVTiayrMQpsYrf07b4SRTgjWwv2anMX3?usp=sharing)
 
 
-Complete Analysis for Rent housing prices in Egypt (Cairo & Giza).
 
 ## Auther
 [@mu57f4](https://github.com/mu57f4)
 
 ## Table of Content
-  - [Problem Statement](#Problem-statement)
-  - [Dataset](#data-collection)
+  - [Introduction](#introduction)
+  - [Dataset](#dataset)
   - [Cleaning Process](#cleaning-process)
   - [Location Geo Coding](#location-geocoding)
-  - [EDA](#EDA)
+  - [EDA](#eda)
   - [Machine Learning Preprocessing](#ml-preprocessing)
-  - [Model Selection](#Model-Selection)
-  - [Model Training](#Model-Training)
-  - [Evaluation](#Evaluation)
-  - [Feature Importance and Insights](#Feature-Importance-and-Insights)
-  - [Deployment](#Deployment)
-  - [Limitations and Possible Improvmentsx](#Limitations-and-Possible-Improvments)
+  - [Model Selection](#model-selection)
+  - [Training & Evaluation](#training-and-evaluation)
+  - [Feature Importance and Insights](#feature-importance-and-insights)
+  - [Deployment](#deployment)
+  - [Limitations](#limitations)
   
+
+## Introduction
+This project provides a comprehensive analysis and predictive modeling of rental housing prices in Cairo and Giza, Egypt. The project explores the key factors influencing rent prices using real-world data from online listings, and leverages machine learning techniques to build a price prediction model. The goal is to offer valuable insights for both renters and property owners, enabling more informed decisions the housing market.
 
 ## Dataset
 Data sources:
-- From [dubizzle.com.eg](https://dubizzle.com.eg), check the scripts used in [notebooks](/notebooks/)
+From [dubizzle.com.eg](https://dubizzle.com.eg), check the scripts used in [notebooks](/notebooks/)
 
 Some information about the dataset:
 ```
@@ -504,11 +504,27 @@ mse         11071.525313    8593.873711  10867.309260  14272.652772
 - The lowest MAE and RMSE is Random Forest.
 - Therefor,  selected model is Random Forest model.
 
-## Training & Evaluation
+## Training and Evaluation
+I Trained a baseline RandomForest with initial hyperparameters and evaluated its performance using cross-validation with 5 folds and regression metrics (MAE, RMSE, R²) but with interest for MAE only.
 
+After some experiments playing with hyperparameters, I detected that the model suffers from overfitting, so I tried to reduce the number of features but the performance decreased due to underfitting, and because collecting more data may not work well as it may differ in distribution, I just tried regularizing my random forest model to reduce the overfitting.
+
+The hyperparameters tuning preformed with `GridSearchCV` to find the best combination of parameters for the random forest model, with also cross-validation of 3 folds, and then, trained the best model on the full dataset (Train+Test).
 
 ## Feature Importance and Insights
 
+<img src="imgs/feat_importance.png" width="600" height="400">
+
+This graph shows that the location and whether the house is furnished or not are the most important features to detect a house rent price. Followed by the size of the house, number of bathrooms.
+
+You can notice that the level is not that important compared to the above listed features.
+
 ## Deployment
 
-## Limitations and Possible Improvments
+Created a one page `Streamlit` web application that takes the input from the user, do the preprocessing, then, pass it the model to predict the rent price.
+
+<img src="imgs/web_app.png" width="700" height="400">
+
+## Limitations
+
+This model treats some different features as the same, specifically in the amenities section, which is not right in some cases, this could be improved through feature engineering process. Also, removing some redundant features and combining other new ones may help improving prediction accuracy and reducing overfitting.
